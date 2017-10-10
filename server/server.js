@@ -14,20 +14,18 @@ app.post('/todos', (req, res) => {
     var todo = new Todo({
         text: req.body.text
     });
-
     todo.save().then((doc) => {
-        res.status(201).send({ success: true, message: "Well Done!", data: doc });
+        res.status(200).send(doc);
     }, (error) => {
-        res.status(400).send({ success: false, status: 400, message: "Something is wrong", data: error });
+        res.status(400).send({ success: false, message: "Something is wrong", data: error });
     });
 });
-
-
-
 
 app.listen(3000, () => {
     console.log('Started on port 3000');
 })
+
+module.exports = { app };
 
 
 
