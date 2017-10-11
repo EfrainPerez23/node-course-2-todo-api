@@ -15,7 +15,7 @@ app.post('/todos', (req, res) => {
         text: req.body.text
     });
     todo.save().then((doc) => {
-        res.status(200).send(doc);
+        res.status(200).send({ success: true, message: "Well done!", data: doc });
     }, (error) => {
         res.status(400).send({ success: false, message: "Something is wrong", data: error });
     });
@@ -23,9 +23,9 @@ app.post('/todos', (req, res) => {
 
 app.get('/todos', (req, res) => {
     Todo.find().then((todos) => {
-        res.status(200).send({ todos });
+        res.status(200).send({ success: true, message: "Well done!", data: todos });
     }, (error) => {
-        res.status(400).send(error)
+        res.status(400).send({ success: false, message: "Something is wrong", data: error });
     });
 
 });
