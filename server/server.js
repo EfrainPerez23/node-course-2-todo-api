@@ -45,7 +45,10 @@ app.get('/todos/:id', (req, res) => {
     }).catch((e) => {
         res.status(400).send();
     });
+});
 
+app.use((req, res, next) => {
+    res.status(400).send({ success: false, message: "Something is wrong", data: {} });
 });
 
 app.listen(3000, () => {
