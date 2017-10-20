@@ -26,6 +26,7 @@ app.post('/todos', (req, res) => {
     });
 });
 
+
 app.get('/todos', (req, res) => {
     Todo.find().then((todos) => {
         res.status(200).send({ success: true, message: "Well done!", data: todos });
@@ -94,7 +95,16 @@ app.patch('/todos/:id', (req, res) => {
     }).catch((err) => {
         return res.status(404).send();
     })
+});
 
+app.post('/users', (req, res) => {
+    var body = _.pick(req.body, ['email', 'password']);
+    var user = new User(body);
+    user.save().then((user) => {
+        res.status(200).send({ user });
+    }, (error) => {
+        res.status(400).send({ error });
+    });
 });
 
 app.use((req, res, next) => {
